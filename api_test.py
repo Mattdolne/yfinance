@@ -15,9 +15,7 @@ df = pd.DataFrame(data)
 df.index = pd.to_datetime \
     (df.index, format='%Y-%m-%d')\
         .strftime('%d/%m/%Y')
-#df.index = pd.date_range \
-#    (start='01/01/2020', freq='m', periods=len(df)) \
-#        .strftime('%m/%Y')
+
 df['Data']=df.index
 df['Data'] = pd.to_datetime \
     (df['Data'], format='%d/%m/%Y')
@@ -25,8 +23,11 @@ df['Data'] = pd.to_datetime \
 df.dtypes
 df.head()
 
+#linha abaixo gera arquivo em excel com a tabela construída, foi comentada para não ficar gerando o arquivo sempre que eu rodo o código completo
 #df.to_excel('fechamento_bolsa.xlsx')
 
+
+#time-series em desenvolvimento
 decompose = seasonal_decompose(df)
 fig, (ax1,ax2,ax3, ax4) = plt.subplots(4,1, figsize=(12,8))
 decompose.observed.plot(ax=ax1)
